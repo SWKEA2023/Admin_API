@@ -11,7 +11,6 @@ function setupSwagger(app: INestApplication): void {
     .setVersion('1.0')
     .addBasicAuth()
     .build();
-
   const document = SwaggerModule.createDocument(app, documentBuilder);
   SwaggerModule.setup('api', app, document, {
     swaggerOptions: { defaultModelsExpandDepth: -1 },
