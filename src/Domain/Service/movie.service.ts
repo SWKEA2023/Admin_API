@@ -3,9 +3,14 @@ import { CreateMovieCommand } from '../../Application/Movie/Commands/Impl/create
 import { Movie } from '../../Domain/Entities/Movie';
 import { GetMovieQuery } from '../../Application/Movie/Queries/Impl/get-movie.query';
 import { GetMoviesQuery } from '../../Application/Movie/Queries/Impl/get-movies.query';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Movie as MovieEntity } from '../../Domain/Entities/Movie';
 
+@Injectable()
 export class MovieService {
   constructor(
+    @InjectRepository(MovieEntity)
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
   ) {}
@@ -16,8 +21,8 @@ export class MovieService {
     );
   }
 
-  async getMovie(id: number) {
-    return this.queryBus.execute(new GetMovieQuery(id));
+  async getMovie(movieId: number) {
+    return this.queryBus.execute(new GetMovieQuery(movieId));
   }
 
   async getMovies() {

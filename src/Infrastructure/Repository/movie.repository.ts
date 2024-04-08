@@ -16,8 +16,7 @@ export class MovieRepository {
   }
 
   async getMovie(movieId: number) {
-    //const test = this.movieRepository.findOneBy({ id: movieId });
-    return movieId;
+    return this.movieRepository.findOneBy({ id: movieId });
   }
 
   async getMovies() {}
