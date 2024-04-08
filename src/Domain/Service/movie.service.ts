@@ -12,7 +12,7 @@ export class MovieService {
 
   async createMovie(movie: Movie) {
     return this.commandBus.execute(
-      new CreateMovieCommand(movie.movieId, movie.title, movie.duration),
+      new CreateMovieCommand(movie.id, movie.title, movie.duration),
     );
   }
 
