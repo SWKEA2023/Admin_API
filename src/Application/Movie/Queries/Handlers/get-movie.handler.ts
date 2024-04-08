@@ -1,14 +1,12 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetMovieQuery } from '../Impl/get-movie.query';
-//Import Repository here....
+import { MovieRepository } from '../../../../Infrastructure/Repository/movie.repository';
 
 @QueryHandler(GetMovieQuery)
 export class GetMovieHandler implements IQueryHandler<GetMovieQuery> {
-  constructor() {} //Add Repository here.... //private readonly test;
+  constructor(private readonly movieRepository: MovieRepository) {}
 
   async execute(query: GetMovieQuery) {
-    //Add your logic here....
-    console.log('Hello World from Movie Query Handler');
-    query;
+    return this.movieRepository.getMovie(query.movieId);
   }
 }
