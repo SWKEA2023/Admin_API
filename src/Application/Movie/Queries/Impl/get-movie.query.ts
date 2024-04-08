@@ -1,1 +1,3 @@
-export class GetMovieQuery {}
+export class GetMovieQuery {
+  constructor(public readonly movieId: number) {}
+}
