@@ -1,14 +1,21 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { MovieService } from '../../Domain/Service/movie.service';
 import { Movie } from '../../Domain/Entities/Movie';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('movie')
 export class MovieController {
-  constructor(private readonly movieService: MovieService) {}
+  constructor(
+    private readonly movieService: MovieService,
+    @Inject('MOVIE_QUEUE')
+    private readonly client: ClientProxy,
+  ) {}
 
   @Post()
   async createMovie(@Body() movie: Movie) {
-    return this.movieService.createMovie(movie);
+    const response = await this.movieService.createMovie(movie);
+    this.client.emit('movie_created', response);
+    return response;
   }
 
   @Get(':id')

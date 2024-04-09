@@ -4,20 +4,17 @@ import { Movie } from '../../Domain/Entities/Movie';
 import { GetMovieQuery } from '../../Application/Movie/Queries/Impl/get-movie.query';
 import { GetMoviesQuery } from '../../Application/Movie/Queries/Impl/get-movies.query';
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Movie as MovieEntity } from '../../Domain/Entities/Movie';
 
 @Injectable()
 export class MovieService {
   constructor(
-    @InjectRepository(MovieEntity)
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
   ) {}
 
   async createMovie(movie: Movie) {
     return this.commandBus.execute(
-      new CreateMovieCommand(movie.id, movie.title, movie.duration),
+      new CreateMovieCommand(movie.title, movie.duration),
     );
   }
 

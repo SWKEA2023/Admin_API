@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Movie extends AggregateRoot {
   @PrimaryGeneratedColumn()
-  id: number;
+  movieId: number;
 
   @Column()
   title: string;

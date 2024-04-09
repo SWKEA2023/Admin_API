@@ -7,9 +7,25 @@ import { CommandHandlers } from '../Movie/Commands/Handlers';
 import { QueryHandlers } from '../Movie/Queries/Handlers';
 import { CqrsModule } from '@nestjs/cqrs';
 import { MovieRepository } from 'src/Infrastructure/Repository/movie.repository';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import 'dotenv/config';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Movie]), CqrsModule],
+  imports: [
+    TypeOrmModule.forFeature([Movie]),
+    CqrsModule,
+    ClientsModule.register([
+      {
+        name: 'MOVIE_QUEUE',
+        transport: Transport.RMQ,
+        options: {
+          urls: [process.env.RMQ_URL],
+          queue: process.env.RMQ_QUEUE,
+          queueOptions: { durable: true },
+        },
+      },
+    ]),
+  ],
   providers: [
     MovieService,
     MovieRepository,
