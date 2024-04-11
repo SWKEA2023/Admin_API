@@ -19,7 +19,9 @@ export class MovieRepository {
     return this.movieRepository.findOneBy({ movieId: movieId });
   }
 
-  async getMovies() {}
+  async getMovies() {
+    return this.movieRepository.find();
+  }
 
   async updateMovie(movie: Movie) {
     console.log('Hello World from Movie Repository');
