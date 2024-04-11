@@ -2,8 +2,8 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateMovieCommand } from '../../Application/Movie/Commands/Impl/create-movie.command';
 import { Movie } from '../../Domain/Entities/Movie';
 import { GetMovieQuery } from '../../Application/Movie/Queries/Impl/get-movie.query';
-import { GetMoviesQuery } from '../../Application/Movie/Queries/Impl/get-movies.query';
 import { Injectable } from '@nestjs/common';
+import { GetMoviesQuery } from 'src/Application/Movie/Queries/Impl/get-movies.query';
 
 @Injectable()
 export class MovieService {
