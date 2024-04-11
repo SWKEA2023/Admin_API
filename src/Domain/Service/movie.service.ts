@@ -4,6 +4,7 @@ import { Movie } from '../../Domain/Entities/Movie';
 import { GetMovieQuery } from '../../Application/Movie/Queries/Impl/get-movie.query';
 import { GetMoviesQuery } from '../../Application/Movie/Queries/Impl/get-movies.query';
 import { Injectable } from '@nestjs/common';
+import { UpdateMovieCommand } from 'src/Application/Movie/Commands/Impl/update-movie.command';
 
 @Injectable()
 export class MovieService {
@@ -24,5 +25,11 @@ export class MovieService {
 
   async getMovies() {
     return this.queryBus.execute(new GetMoviesQuery());
+  }
+
+  async updateMovie(movie: Movie) {
+    return this.commandBus.execute(
+      new UpdateMovieCommand(movie.movieId, movie.title, movie.duration),
+    );
   }
 }

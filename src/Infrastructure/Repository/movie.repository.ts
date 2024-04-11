@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Movie } from '../../Domain/Entities/Movie';
 import { CreateMovieCommand } from 'src/Application/Movie/Commands/Impl/create-movie.command';
+import { UpdateMovieCommand } from 'src/Application/Movie/Commands/Impl/update-movie.command';
 
 @Injectable()
 export class MovieRepository {
@@ -23,9 +24,8 @@ export class MovieRepository {
     return this.movieRepository.find();
   }
 
-  async updateMovie(movie: Movie) {
-    console.log('Hello World from Movie Repository');
-    movie;
+  async updateMovie(movie: UpdateMovieCommand) {
+    return this.movieRepository.save(movie);
   }
 
   async deleteMovie(movie: Movie) {

@@ -56,4 +56,11 @@ export class MovieController {
   async getMovies() {
     return this.movieService.getMovies();
   }
+
+  @Post('update')
+  @ApiOperation({ summary: 'Update movie' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async updateMovie(@Body() movie: Movie) {
+    return this.movieService.updateMovie(movie);
+  }
 }
