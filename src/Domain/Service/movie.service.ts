@@ -5,6 +5,7 @@ import { GetMovieQuery } from '../../Application/Movie/Queries/Impl/get-movie.qu
 import { GetMoviesQuery } from '../../Application/Movie/Queries/Impl/get-movies.query';
 import { Injectable } from '@nestjs/common';
 import { UpdateMovieCommand } from 'src/Application/Movie/Commands/Impl/update-movie.command';
+import { DeleteMovieCommand } from 'src/Application/Movie/Commands/Impl/delete-movie.command';
 
 @Injectable()
 export class MovieService {
@@ -31,5 +32,9 @@ export class MovieService {
     return this.commandBus.execute(
       new UpdateMovieCommand(movie.movieId, movie.title, movie.duration),
     );
+  }
+
+  async deleteMovie(movieId: number) {
+    return this.commandBus.execute(new DeleteMovieCommand(movieId));
   }
 }

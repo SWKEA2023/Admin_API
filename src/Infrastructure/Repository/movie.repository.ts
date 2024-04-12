@@ -28,8 +28,7 @@ export class MovieRepository {
     return this.movieRepository.save(movie);
   }
 
-  async deleteMovie(movie: Movie) {
-    console.log('Hello World from Movie Repository');
-    movie;
+  async deleteMovie(movieId: number) {
+    return this.movieRepository.delete(movieId);
   }
 }
