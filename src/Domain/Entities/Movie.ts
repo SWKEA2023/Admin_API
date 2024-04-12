@@ -25,8 +25,4 @@ export class Movie extends AggregateRoot {
   })
   @Column()
   duration: number;
-
-  create() {
-    //this.apply( new MovieCreatedEvent(this));
-  }
 }
