@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { HallService } from '../../../Domain/Service/hall.service';
-import { HallController } from '../../../Interface/Controllers/hall.controller';
-import { Hall } from '../../../Domain/Entities/Hall';
-import { CommandHandlers } from '../../Hall/Commands/Handlers';
-import { QueryHandlers } from '../../Hall/Queries/Handlers';
+import { HallService } from '../../Domain/Service/hall.service';
+import { HallController } from '../../Interface/Controllers/hall.controller';
+import { Hall } from '../../Domain/Entities/Hall';
+import { CommandHandlers } from './Commands/Handlers';
+import { QueryHandlers } from './Queries/Handlers';
 import { CqrsModule } from '@nestjs/cqrs';
 import { HallRepository } from 'src/Infrastructure/Repository/hall.repository';
 import { ClientsModule, Transport } from '@nestjs/microservices';
