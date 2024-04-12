@@ -63,4 +63,11 @@ export class MovieController {
   async updateMovie(@Body() movie: Movie) {
     return this.movieService.updateMovie(movie);
   }
+
+  @Post(':id')
+  @ApiOperation({ summary: 'Delete movie' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async deleteMovie(@Param('id') movieId: number) {
+    return this.movieService.deleteMovie(movieId);
+  }
 }
