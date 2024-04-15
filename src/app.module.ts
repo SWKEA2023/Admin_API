@@ -11,6 +11,8 @@ import { CustomerModule } from './Application/Customer/customer.module';
 import { Customer } from './Domain/Entities/Customer';
 import { SeatModule } from './Application/Seat/seat.module';
 import { Seat } from './Domain/Entities/Seat';
+import { ScreeningModule } from './Application/Screening/screening.module';
+import { Screening } from './Domain/Entities/Screening';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { Seat } from './Domain/Entities/Seat';
     SeatModule,
     HallModule,
     CustomerModule,
+    ScreeningModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -26,7 +29,7 @@ import { Seat } from './Domain/Entities/Seat';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Movie, Hall, Customer, Seat],
+      entities: [Movie, Hall, Customer, Seat, Screening],
       synchronize: true,
     }),
   ],
