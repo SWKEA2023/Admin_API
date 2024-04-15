@@ -13,6 +13,8 @@ import { SeatModule } from './Application/Seat/seat.module';
 import { Seat } from './Domain/Entities/Seat';
 import { ScreeningModule } from './Application/Screening/screening.module';
 import { Screening } from './Domain/Entities/Screening';
+import { TicketModule } from './Application/Ticket/ticket.module';
+import { Ticket } from './Domain/Entities/Ticket';
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import { Screening } from './Domain/Entities/Screening';
     HallModule,
     CustomerModule,
     ScreeningModule,
+    TicketModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -29,7 +32,7 @@ import { Screening } from './Domain/Entities/Screening';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Movie, Hall, Customer, Seat, Screening],
+      entities: [Movie, Hall, Customer, Seat, Screening, Ticket],
       synchronize: true,
     }),
   ],
