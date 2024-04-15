@@ -32,10 +32,6 @@ export class Screening {
   @Column()
   endTime: Date;
 
-  @ApiProperty({
-    type: Date,
-    description: 'This is a required property',
-  })
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
