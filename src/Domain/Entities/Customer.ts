@@ -39,4 +39,11 @@ export class Customer extends AggregateRoot {
   })
   @Column()
   phoneNumber: string;
+
+  @ApiProperty({
+    type: Date,
+    description: 'This is a required property',
+  })
+  @Column()
+  createdAt: Date;
 }

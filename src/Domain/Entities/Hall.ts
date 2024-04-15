@@ -17,12 +17,26 @@ export class Hall extends AggregateRoot {
     description: 'This is a required property',
   })
   @Column()
-  name: string;
+  hallName: string;
 
   @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
   @Column()
-  capacity: number;
+  seatRows: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'This is a required property',
+  })
+  @Column()
+  seatNumber: number;
+
+  @ApiProperty({
+    type: Date,
+    description: 'This is a required property',
+  })
+  @Column()
+  createdAt: Date;
 }

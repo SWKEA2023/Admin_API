@@ -20,9 +20,58 @@ export class Movie extends AggregateRoot {
   title: string;
 
   @ApiProperty({
+    type: String,
+    description: 'This is a required property',
+  })
+  @Column()
+  director: string;
+
+  @ApiProperty({
+    type: Number,
+    description: 'This is a required property',
+  })
+  @Column()
+  year: number;
+
+  @ApiProperty({
+    type: String,
+    description: 'This is a required property',
+  })
+  @Column()
+  language: string;
+
+  @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
   @Column()
   duration: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'This is a required property',
+  })
+  @Column()
+  pegi: number;
+
+  @ApiProperty({
+    type: String,
+    description: 'This is a required property',
+  })
+  @Column()
+  imageURL: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'This is a required property',
+  })
+  @Column()
+  trailerURL: string;
+
+  @ApiProperty({
+    type: Date,
+    description: 'This is a required property',
+  })
+  @Column()
+  createdAt: Date;
 }

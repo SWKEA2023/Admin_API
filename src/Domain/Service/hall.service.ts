@@ -16,7 +16,7 @@ export class HallService {
 
   async createHall(hall: Hall) {
     return this.commandBus.execute(
-      new CreateHallCommand(hall.name, hall.capacity),
+      new CreateHallCommand(hall.hallName, hall.seatRows, hall.seatNumber),
     );
   }
 
@@ -30,7 +30,12 @@ export class HallService {
 
   async updateHall(hall: Hall) {
     return this.commandBus.execute(
-      new UpdateHallCommand(hall.hallId, hall.name, hall.capacity),
+      new UpdateHallCommand(
+        hall.hallId,
+        hall.hallName,
+        hall.seatRows,
+        hall.seatNumber,
+      ),
     );
   }
 
