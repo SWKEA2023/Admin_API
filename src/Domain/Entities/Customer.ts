@@ -10,7 +10,7 @@ export class Customer extends AggregateRoot {
     readOnly: true,
   })
   @PrimaryGeneratedColumn()
-  id: number;
+  customerId: number;
 
   @ApiProperty({
     type: String,
@@ -34,11 +34,9 @@ export class Customer extends AggregateRoot {
   email: string;
 
   @ApiProperty({
-    type: Number,
+    type: String,
     description: 'This is a required property',
   })
   @Column()
   phoneNumber: string;
-  name: string;
-  customerId: number;
 }

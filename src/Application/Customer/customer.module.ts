@@ -16,7 +16,7 @@ import { CustomerRepository } from 'src/Infrastructure/Repository/customer.repos
     CqrsModule,
     ClientsModule.register([
       {
-        name: 'Customer_QUEUE',
+        name: 'CUSTOMER_QUEUE',
         transport: Transport.RMQ,
         options: {
           urls: [process.env.RMQ_URL],
