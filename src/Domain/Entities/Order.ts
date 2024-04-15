@@ -1,22 +1,27 @@
+import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Order {
+  @ApiPropertyOptional({
+    type: Number,
+    description: 'This is an optional property',
+    readOnly: true,
+  })
   @PrimaryGeneratedColumn()
-  id: number;
+  orderId: number;
 
+  @ApiProperty({
+    type: Date,
+    description: 'This is a required property',
+  })
   @Column()
-  customer_id: number;
+  createdAt: Date;
 
+  @ApiProperty({
+    type: Number,
+    description: 'This is a required property',
+  })
   @Column()
-  movie_id: number;
-
-  @Column()
-  hall_id: number;
-
-  @Column()
-  seat_id: number;
-
-  @Column()
-  date: Date;
+  fkCustomerId: number;
 }

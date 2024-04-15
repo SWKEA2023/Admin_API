@@ -1,7 +1,8 @@
 export class UpdateHallCommand {
   constructor(
     public readonly hallId: number,
-    public readonly name: string,
-    public readonly capacity: number,
+    public readonly hallName: string,
+    public readonly seatRows: number,
+    public readonly seatNumber: number,
   ) {}
 }
