@@ -16,7 +16,16 @@ export class MovieService {
 
   async createMovie(movie: Movie) {
     return this.commandBus.execute(
-      new CreateMovieCommand(movie.title, movie.duration),
+      new CreateMovieCommand(
+        movie.title,
+        movie.year,
+        movie.language,
+        movie.duration,
+        movie.director,
+        movie.pegi,
+        movie.imageURL,
+        movie.trailerURL,
+      ),
     );
   }
 
@@ -30,7 +39,17 @@ export class MovieService {
 
   async updateMovie(movie: Movie) {
     return this.commandBus.execute(
-      new UpdateMovieCommand(movie.movieId, movie.title, movie.duration),
+      new UpdateMovieCommand(
+        movie.movieId,
+        movie.title,
+        movie.year,
+        movie.language,
+        movie.duration,
+        movie.director,
+        movie.pegi,
+        movie.imageURL,
+        movie.trailerURL,
+      ),
     );
   }
 
