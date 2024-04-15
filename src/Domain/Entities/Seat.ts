@@ -12,18 +12,18 @@ export class Seat {
   seatId: number;
 
   @ApiProperty({
-    type: String,
+    type: Number,
     description: 'This is a required property',
   })
   @Column()
-  seatRow: string;
+  seatRow: number;
 
   @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
   @Column()
-  SeatNumber: number;
+  seatNumber: number;
 
   @ApiProperty({
     type: Number,
@@ -32,11 +32,7 @@ export class Seat {
   @Column()
   price: number;
 
-  @ApiProperty({
-    type: Date,
-    description: 'This is a required property',
-  })
-  @Column()
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
   @ApiProperty({

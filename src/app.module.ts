@@ -9,10 +9,13 @@ import { Movie } from './Domain/Entities/Movie';
 import { Hall } from './Domain/Entities/Hall';
 import { CustomerModule } from './Application/Customer/customer.module';
 import { Customer } from './Domain/Entities/Customer';
+import { SeatModule } from './Application/Seat/seat.module';
+import { Seat } from './Domain/Entities/Seat';
 
 @Module({
   imports: [
     MovieModule,
+    SeatModule,
     HallModule,
     CustomerModule,
     ConfigModule.forRoot(),
@@ -23,7 +26,7 @@ import { Customer } from './Domain/Entities/Customer';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Movie, Hall, Customer],
+      entities: [Movie, Hall, Customer, Seat],
       synchronize: true,
     }),
   ],
