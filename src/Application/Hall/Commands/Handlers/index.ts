@@ -1,6 +1,6 @@
 import { CreateHallHandler } from './create-hall.handler';
 import { UpdateHallHandler } from './update-hall.handler';
-import { DeleteHallHandler } from './delete-hallhandler';
+import { DeleteHallHandler } from './delete-hall.handler';
 
 export const CommandHandlers = [
   CreateHallHandler,

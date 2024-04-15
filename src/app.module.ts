@@ -7,11 +7,14 @@ import { MovieModule } from './Application/Movie/movie.module';
 import { HallModule } from './Application/Hall/hall.module';
 import { Movie } from './Domain/Entities/Movie';
 import { Hall } from './Domain/Entities/Hall';
+import { CustomerModule } from './Application/Customer/customer.module';
+import { Customer } from './Domain/Entities/Customer';
 
 @Module({
   imports: [
     MovieModule,
     HallModule,
+    CustomerModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -20,7 +23,7 @@ import { Hall } from './Domain/Entities/Hall';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Movie, Hall],
+      entities: [Movie, Hall, Customer],
       synchronize: true,
     }),
   ],
