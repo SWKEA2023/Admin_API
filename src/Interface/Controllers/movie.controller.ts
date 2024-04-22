@@ -61,13 +61,17 @@ export class MovieController {
   @ApiOperation({ summary: 'Update movie' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateMovie(@Body() movie: Movie) {
-    return this.movieService.updateMovie(movie);
+    const response = await this.movieService.updateMovie(movie);
+    this.client.emit('movie_updated', response);
+    return response;
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete movie' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteMovie(@Param('id') movieId: number) {
-    return this.movieService.deleteMovie(movieId);
+    const response = await this.movieService.deleteMovie(movieId);
+    this.client.emit('movie_deleted', response);
+    return response;
   }
 }

@@ -61,13 +61,17 @@ export class HallController {
   @ApiOperation({ summary: 'Update hall' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateHall(@Body() hall: Hall) {
-    return this.hallService.updateHall(hall);
+    const response = await this.hallService.updateHall(hall);
+    this.client.emit('hall_updated', response);
+    return response;
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete hall' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteHall(@Param('id') hallId: number) {
-    return this.hallService.deleteHall(hallId);
+    const response = await this.hallService.deleteHall(hallId);
+    this.client.emit('hall_deleted', response);
+    return response;
   }
 }

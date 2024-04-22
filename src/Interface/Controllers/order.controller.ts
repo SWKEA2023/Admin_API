@@ -61,13 +61,17 @@ export class OrderController {
   @ApiOperation({ summary: 'Update order' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateOrder(@Body() order: Order) {
-    return this.orderService.updateOrder(order);
+    const response = await this.orderService.updateOrder(order);
+    this.client.emit('Order_updated', response);
+    return response;
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete order' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteOrder(@Param('id') orderId: number) {
-    return this.orderService.deleteOrder(orderId);
+    const response = await this.orderService.getOrder(orderId);
+    this.client.emit('Order_deleted', response);
+    return response;
   }
 }

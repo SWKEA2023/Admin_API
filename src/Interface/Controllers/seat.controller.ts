@@ -61,13 +61,17 @@ export class SeatController {
   @ApiOperation({ summary: 'Update seat' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateSeat(@Body() seat: Seat) {
-    return this.seatService.updateSeat(seat);
+    const response = await this.seatService.updateSeat(seat);
+    this.client.emit('seat_updated', response);
+    return response;
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete seat' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteSeat(@Param('id') seatId: number) {
-    return this.seatService.deleteSeat(seatId);
+    const response = await this.seatService.getSeat(seatId);
+    this.client.emit('seat_deleted', response);
+    return response;
   }
 }

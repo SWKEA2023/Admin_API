@@ -61,13 +61,17 @@ export class CustomerController {
   @ApiOperation({ summary: 'Update customer' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateCustomer(@Body() customer: Customer) {
-    return this.customerService.updateCustomer(customer);
+    const response = await this.customerService.updateCustomer(customer);
+    this.client.emit('customer_updated', response);
+    return response;
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete customer' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteCustomer(@Param('id') customerId: number) {
-    return this.customerService.deleteCustomer(customerId);
+    const response = await this.customerService.deleteCustomer(customerId);
+    this.client.emit('customer_deleted', response);
+    return response;
   }
 }

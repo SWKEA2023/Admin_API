@@ -61,13 +61,17 @@ export class ScreeningController {
   @ApiOperation({ summary: 'Update screening' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateScreening(@Body() screening: Screening) {
-    return this.screeningService.updateScreening(screening);
+    const response = await this.screeningService.updateScreening(screening);
+    this.client.emit('screening_updated', response);
+    return response;
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete screening' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteScreening(@Param('id') screeningId: number) {
-    return this.screeningService.deleteScreening(screeningId);
+    const response = await this.screeningService.getScreening(screeningId);
+    this.client.emit('screening_deleted', response);
+    return response;
   }
 }

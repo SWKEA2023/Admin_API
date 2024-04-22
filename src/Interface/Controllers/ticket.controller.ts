@@ -61,13 +61,17 @@ export class TicketController {
   @ApiOperation({ summary: 'Update ticket' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateTicket(@Body() ticket: Ticket) {
-    return this.ticketService.updateTicket(ticket);
+    const response = await this.ticketService.updateTicket(ticket);
+    this.client.emit('ticket_updated', response);
+    return response;
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete ticket' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteTicket(@Param('id') ticketId: number) {
-    return this.ticketService.deleteTicket(ticketId);
+    const response = await this.ticketService.deleteTicket(ticketId);
+    this.client.emit('ticket_deleted', response);
+    return response;
   }
 }
