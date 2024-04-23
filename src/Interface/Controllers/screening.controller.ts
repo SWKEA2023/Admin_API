@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { ScreeningService } from '../../Domain/Service/screening.service';
 import { Screening } from '../../Domain/Entities/Screening';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -55,6 +55,12 @@ export class ScreeningController {
   })
   async getScreenings() {
     return this.screeningService.getScreenings();
+  }
+
+  @MessagePattern('get_all_screenings')
+  async getScreeningsEs() {
+    const response = await this.screeningService.getScreenings();
+    this.client.emit('screenings_list', response);
   }
 
   @Post('update')

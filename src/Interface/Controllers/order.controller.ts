@@ -29,9 +29,7 @@ export class OrderController {
     description: 'The record has been successfully created',
   })
   async createOrder(@Body() order: Order) {
-    const response = await this.orderService.createOrder(order);
-    this.client.emit('Order_created', response);
-    return response;
+    return this.orderService.createOrder(order);
   }
 
   @Get(':id')
@@ -61,17 +59,13 @@ export class OrderController {
   @ApiOperation({ summary: 'Update order' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateOrder(@Body() order: Order) {
-    const response = await this.orderService.updateOrder(order);
-    this.client.emit('Order_updated', response);
-    return response;
+    return this.orderService.updateOrder(order);
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete order' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteOrder(@Param('id') orderId: number) {
-    const response = await this.orderService.getOrder(orderId);
-    this.client.emit('Order_deleted', response);
-    return response;
+    return this.orderService.getOrder(orderId);
   }
 }

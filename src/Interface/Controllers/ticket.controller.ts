@@ -29,9 +29,7 @@ export class TicketController {
     description: 'The record has been successfully created',
   })
   async createTicket(@Body() ticket: Ticket) {
-    const response = await this.ticketService.createTicket(ticket);
-    this.client.emit('ticket_created', response);
-    return response;
+    return this.ticketService.createTicket(ticket);
   }
 
   @Get(':id')
@@ -61,17 +59,13 @@ export class TicketController {
   @ApiOperation({ summary: 'Update ticket' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateTicket(@Body() ticket: Ticket) {
-    const response = await this.ticketService.updateTicket(ticket);
-    this.client.emit('ticket_updated', response);
-    return response;
+    return this.ticketService.updateTicket(ticket);
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete ticket' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteTicket(@Param('id') ticketId: number) {
-    const response = await this.ticketService.deleteTicket(ticketId);
-    this.client.emit('ticket_deleted', response);
-    return response;
+    return this.ticketService.deleteTicket(ticketId);
   }
 }
