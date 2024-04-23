@@ -51,3 +51,12 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## RabbitMQ Updates
+### Get all movies 
+trigger: get_all_movies 
+que: movies_list
+
+### Get all screenings 
+trigger: get_all_screenings
+que: screenings_list

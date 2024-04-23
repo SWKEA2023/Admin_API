@@ -29,9 +29,7 @@ export class CustomerController {
     description: 'The record has been successfully created',
   })
   async createCustomer(@Body() customer: Customer) {
-    const response = await this.customerService.createCustomer(customer);
-    this.client.emit('customer_created', response);
-    return response;
+    return this.customerService.createCustomer(customer); 
   }
 
   @Get(':id')
@@ -61,17 +59,14 @@ export class CustomerController {
   @ApiOperation({ summary: 'Update customer' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async updateCustomer(@Body() customer: Customer) {
-    const response = await this.customerService.updateCustomer(customer);
-    this.client.emit('customer_updated', response);
-    return response;
+    return this.customerService.updateCustomer(customer);
+    
   }
 
   @Post(':id')
   @ApiOperation({ summary: 'Delete customer' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteCustomer(@Param('id') customerId: number) {
-    const response = await this.customerService.deleteCustomer(customerId);
-    this.client.emit('customer_deleted', response);
-    return response;
+    return this.customerService.deleteCustomer(customerId);
   }
 }

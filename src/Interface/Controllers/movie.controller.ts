@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { MovieService } from '../../Domain/Service/movie.service';
 import { Movie } from '../../Domain/Entities/Movie';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -55,6 +55,12 @@ export class MovieController {
   })
   async getMovies() {
     return this.movieService.getMovies();
+  }
+
+  @MessagePattern('get_all_movies')
+  async getMoviesEs() {
+    const response = this.movieService.getMovies();
+    this.client.emit('movies_list', response);
   }
 
   @Post('update')
