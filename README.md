@@ -60,3 +60,27 @@ Que: movies_list
 ### Get all screenings 
 Trigger: get_all_screenings</br> 
 Que: screenings_list
+
+<details><summary>Created</summary>
+Hall: hall_created</br> 
+Movie: movie_created</br> 
+Product: product_created</br> 
+Seat: seat_created</br> 
+Screening: screening_created</br> 
+</details></br> 
+
+<details><summary>Updated</summary>
+Hall: hall_updated</br> 
+Movie: movie_updated</br> 
+Product: product_updated</br> 
+Seat: seat_updated</br> 
+Screening: screening_updated</br> 
+</details></br> 
+
+<details><summary>Deleted</summary>
+Hall: hall_deleted</br> 
+Movie: movie_deleted</br> 
+Product: product_deleted</br> 
+Seat: seat_deleted</br> 
+Screening: screening_deleted</br> 
+</details></br> 
