@@ -1,5 +1,5 @@
 import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { Order } from './Order';
 
 @Entity()
@@ -33,17 +33,22 @@ export class Product {
   @Column()
   category: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     type: Date,
-    description: 'This is a required property',
+    description: 'This is a optional property',
   })
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     type: Order,
-    description: 'This is a required property',
+    description: 'This is a optional property',
   })
+  @ManyToMany(
+    () => Order,
+    order => order.products,
+    {onDelete: 'NO ACTION', onUpdate: 'NO ACTION',},
+  )
   @Column()
   orders: Order[];
 }
