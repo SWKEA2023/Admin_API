@@ -1,5 +1,6 @@
 import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, JoinTable, ManyToMany } from 'typeorm';
+import { Product } from './Product';
 
 @Entity()
 export class Order {
@@ -24,4 +25,22 @@ export class Order {
   })
   @Column()
   fkCustomerId: number;
+
+  @ManyToMany(
+    () => Product, 
+    product => product.orders, //optional
+    {onDelete: 'NO ACTION', onUpdate: 'NO ACTION'})
+    @JoinTable({
+      name: 'order_product',
+      joinColumn: {
+        name: 'order_id',
+        referencedColumnName: 'orderId',
+      },
+      inverseJoinColumn: {
+        name: 'product_id',
+        referencedColumnName: 'productId',
+      },
+    })
+    @Column()
+    products: Product[];
 }
