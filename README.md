@@ -54,9 +54,9 @@ Nest is [MIT licensed](LICENSE).
 
 ## RabbitMQ Updates
 ### Get all movies 
-trigger: get_all_movies 
-que: movies_list
+Trigger: get_all_movies</br> 
+Que: movies_list
 
 ### Get all screenings 
-trigger: get_all_screenings
-que: screenings_list
+Trigger: get_all_screenings</br> 
+Que: screenings_list
