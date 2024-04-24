@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { MovieService } from '../../Domain/Service/movie.service';
 import { Movie } from '../../Domain/Entities/Movie';
-import { ClientProxy, MessagePattern } from '@nestjs/microservices';
+import { ClientProxy } from '@nestjs/microservices';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -57,10 +57,17 @@ export class MovieController {
     return this.movieService.getMovies();
   }
 
-  @MessagePattern('get_all_movies')
+  @Get('es')
+  @ApiOperation({ summary: 'Send all movies to ES' })
+  @ApiResponse({
+    status: 200,
+    description: 'Gets all movies from database and sends them to ES via RabbitMQ',
+    type: '',
+    isArray: true,
+  })
   async getMoviesEs() {
-    const response = this.movieService.getMovies();
-    this.client.emit('movies_list', response);
+    const response = await this.movieService.getMovies();
+    this.client.emit('InsertMovies', response);
   }
 
   @Post('update')
