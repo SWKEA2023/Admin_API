@@ -29,9 +29,27 @@ export class MovieController {
     description: 'The record has been successfully created',
   })
   async createMovie(@Body() movie: Movie) {
+    console.log(movie);
+
     const response = await this.movieService.createMovie(movie);
     this.client.emit('movie_created', response);
     return response;
+  }
+
+  @Get('es')
+  @ApiOperation({ summary: 'Send all movies to ES' })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Gets all movies from database and sends them to ES via RabbitMQ',
+    type: '',
+    isArray: true,
+  })
+  async getMoviesEs() {
+    const response = await this.movieService.getMovies();
+    console.log(response);
+
+    this.client.emit('insert_movies', response);
   }
 
   @Get(':id')
@@ -55,19 +73,6 @@ export class MovieController {
   })
   async getMovies() {
     return this.movieService.getMovies();
-  }
-
-  @Get('es')
-  @ApiOperation({ summary: 'Send all movies to ES' })
-  @ApiResponse({
-    status: 200,
-    description: 'Gets all movies from database and sends them to ES via RabbitMQ',
-    type: '',
-    isArray: true,
-  })
-  async getMoviesEs() {
-    const response = await this.movieService.getMovies();
-    this.client.emit('InsertMovies', response);
   }
 
   @Post('update')
