@@ -32,6 +32,11 @@ export class Screening {
   @Column()
   endTime: Date;
 
+  @ApiPropertyOptional({
+    type: Date,
+    description: 'This is an optional property',
+    readOnly: true,
+  })
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 

@@ -32,6 +32,11 @@ export class Seat {
   @Column()
   price: number;
 
+  @ApiPropertyOptional({
+    type: Date,
+    description: 'This is an optional property',
+    readOnly: true,
+  })
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 

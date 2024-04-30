@@ -40,9 +40,10 @@ export class Customer extends AggregateRoot {
   @Column()
   phoneNumber: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     type: Date,
-    description: 'This is a required property',
+    description: 'This is an optional property',
+    readOnly: true,
   })
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
