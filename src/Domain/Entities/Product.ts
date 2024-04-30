@@ -1,5 +1,5 @@
 import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable } from 'typeorm';
 import { Order } from './Order';
 
 @Entity()
@@ -49,6 +49,17 @@ export class Product {
     order => order.products,
     {onDelete: 'NO ACTION', onUpdate: 'NO ACTION',},
   )
-  @Column()
+  @JoinColumn()
+  @JoinTable({
+    name: 'product_order',
+    joinColumn: {
+      name: 'fk_product_id',
+      referencedColumnName: 'productId',
+    },
+    inverseJoinColumn: {
+      name: 'fk_order_id',
+      referencedColumnName: 'orderId',
+    },
+  })
   orders: Order[];
 }

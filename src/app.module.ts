@@ -15,10 +15,14 @@ import { ScreeningModule } from './Application/Screening/screening.module';
 import { Screening } from './Domain/Entities/Screening';
 import { TicketModule } from './Application/Ticket/ticket.module';
 import { Ticket } from './Domain/Entities/Ticket';
+import { ProductModule } from './Application/Product/product.module';
+import { Product } from './Domain/Entities/Product';
+import { Order } from './Domain/Entities/Order';
 
 @Module({
   imports: [
     MovieModule,
+    ProductModule,
     SeatModule,
     HallModule,
     CustomerModule,
@@ -32,7 +36,7 @@ import { Ticket } from './Domain/Entities/Ticket';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Movie, Hall, Customer, Seat, Screening, Ticket],
+      entities: [Movie, Hall, Customer, Seat, Screening, Ticket, Order, Product],
       synchronize: true,
     }),
   ],
