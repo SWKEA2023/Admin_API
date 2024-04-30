@@ -44,8 +44,6 @@ export class ScreeningController {
   })
   async getScreeningsEs() {
     const response = await this.screeningService.getScreenings();
-    console.log('response', response);
-
     this.client.emit('screenings_list', response);
   }
 

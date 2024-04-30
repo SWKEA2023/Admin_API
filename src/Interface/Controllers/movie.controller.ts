@@ -29,7 +29,6 @@ export class MovieController {
     description: 'The record has been successfully created',
   })
   async createMovie(@Body() movie: Movie) {
-    console.log(movie);
 
     const response = await this.movieService.createMovie(movie);
     this.client.emit('movie_created', response);
