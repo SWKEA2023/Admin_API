@@ -49,18 +49,18 @@ export class Screening {
   createdAt: Date;
 
   @ApiProperty({
-    type: Number,
+    type: Hall,
     description: 'This is a required property',
   })
   @ManyToOne(() => Hall)
   @JoinColumn({ name: 'hall_id' })
-  hall: number;
+  hall: Hall;
 
   @ApiProperty({
-    type: Number,
+    type: Movie,
     description: 'This is a required property',
   })
   @ManyToOne(() => Movie)
   @JoinColumn({ name: 'movie_id' })
-  movie: number;
+  movie: Movie;
 }

@@ -15,15 +15,7 @@ export class ScreeningService {
   ) {}
 
   async createScreening(screening: Screening) {
-    return this.commandBus.execute(
-      new CreateScreeningCommand(
-        screening.date,
-        screening.startTime,
-        screening.endTime,
-        screening.movie,
-        screening.hall,
-      ),
-    );
+    return this.commandBus.execute(new CreateScreeningCommand(screening));
   }
 
   async getScreening(screeningId: number) {
@@ -35,16 +27,7 @@ export class ScreeningService {
   }
 
   async updateScreening(screening: Screening) {
-    return this.commandBus.execute(
-      new UpdateScreeningCommand(
-        screening.screeningId,
-        screening.date,
-        screening.startTime,
-        screening.endTime,
-        screening.hall,
-        screening.movie,
-      ),
-    );
+    return this.commandBus.execute(new UpdateScreeningCommand(screening));
   }
 
   async deleteScreening(screeningId: number) {

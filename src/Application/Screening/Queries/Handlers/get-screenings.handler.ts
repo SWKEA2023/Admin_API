@@ -7,8 +7,6 @@ export class GetScreeningsHandler implements IQueryHandler<GetScreeningsQuery> {
   constructor(private readonly screeningRepsitory: ScreeningRepository) {}
 
   async execute() {
-    console.log('GetScreeningsHandler');
-    
     return await this.screeningRepsitory.getScreenings();
   }
 }

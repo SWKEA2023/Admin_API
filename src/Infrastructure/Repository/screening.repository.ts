@@ -13,7 +13,7 @@ export class ScreeningRepository {
   ) {}
 
   async createScreening(screening: CreateScreeningCommand) {
-    return this.screeningRepository.save(screening);
+    return this.screeningRepository.save(screening.screening);
   }
 
   async getScreening(screeningId: number) {
@@ -21,17 +21,13 @@ export class ScreeningRepository {
   }
 
   async getScreenings() {
-    const response = await this.screeningRepository.find({
+    return await this.screeningRepository.find({
       relations: ['hall', 'movie'],
     });
-
-    console.log(response);
-
-    return response;
   }
 
   async updateScreening(screening: UpdateScreeningCommand) {
-    return this.screeningRepository.save(screening);
+    return this.screeningRepository.save(screening.screening);
   }
 
   async deleteScreening(screeningId: number) {

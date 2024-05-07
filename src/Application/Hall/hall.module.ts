@@ -33,5 +33,6 @@ import 'dotenv/config';
     ...QueryHandlers,
   ],
   controllers: [HallController],
+  exports: [HallRepository],
 })
 export class HallModule {}

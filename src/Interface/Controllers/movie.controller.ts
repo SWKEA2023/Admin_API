@@ -46,8 +46,6 @@ export class MovieController {
   })
   async getMoviesEs() {
     const response = await this.movieService.getMovies();
-    console.log(response);
-
     this.client.emit('insert_movies', response);
   }
 
