@@ -52,15 +52,21 @@ export class Screening {
     type: Hall,
     description: 'This is a required property',
   })
-  @ManyToOne(() => Hall)
-  @JoinColumn({ name: 'hall_id' })
+  @ManyToOne(() => Hall, (hall) => hall.hallId, { onDelete: 'CASCADE' })
+  @JoinColumn({
+    name: 'fk_hall_id',
+    referencedColumnName: 'hallId',
+  })
   hall: Hall;
 
   @ApiProperty({
     type: Movie,
     description: 'This is a required property',
   })
-  @ManyToOne(() => Movie)
-  @JoinColumn({ name: 'movie_id' })
+  @ManyToOne(() => Movie, (movie) => movie, { onDelete: 'CASCADE' })
+  @JoinColumn({
+    name: 'fk_movie_id',
+    referencedColumnName: 'movieId',
+  })
   movie: Movie;
 }

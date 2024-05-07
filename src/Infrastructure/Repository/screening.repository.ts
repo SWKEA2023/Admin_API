@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Screening } from '../../Domain/Entities/Screening';
-import { CreateScreeningCommand } from 'src/Application/Screening/Commands/Impl/create-screening.command';
-import { UpdateScreeningCommand } from 'src/Application/Screening/Commands/Impl/update-screening.command';
 
 @Injectable()
 export class ScreeningRepository {
@@ -12,12 +10,15 @@ export class ScreeningRepository {
     private readonly screeningRepository: Repository<Screening>,
   ) {}
 
-  async createScreening(screening: CreateScreeningCommand) {
-    return this.screeningRepository.save(screening.screening);
+  async createScreening(screening: Screening) {
+    return this.screeningRepository.save(screening);
   }
 
-  async getScreening(screeningId: number) {
-    return this.screeningRepository.findOneBy({ screeningId: screeningId });
+  async getScreening(id: number) {
+    return this.screeningRepository.findOne({
+      where: { screeningId: id },
+      relations: ['hall', 'movie'],
+    });
   }
 
   async getScreenings() {
@@ -26,11 +27,11 @@ export class ScreeningRepository {
     });
   }
 
-  async updateScreening(screening: UpdateScreeningCommand) {
-    return this.screeningRepository.save(screening.screening);
+  async updateScreening(screening: Screening) {
+    return this.screeningRepository.save(screening);
   }
 
-  async deleteScreening(screeningId: number) {
-    return this.screeningRepository.delete(screeningId);
+  async deleteScreening(id: number) {
+    return this.screeningRepository.delete({ screeningId: id });
   }
 }

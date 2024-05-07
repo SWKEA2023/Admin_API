@@ -1,3 +1,3 @@
 export class DeleteScreeningCommand {
-  constructor(public readonly seatId: number) {}
+  constructor(public readonly screenId: number) {}
 }

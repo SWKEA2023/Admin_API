@@ -14,28 +14,29 @@ export class UpdateScreeningHandler
     private readonly movieRepository: MovieRepository,
   ) {}
 
-  async execute(screening: UpdateScreeningCommand) {
+  async execute(command: UpdateScreeningCommand) {
     try {
-      const hall = screening.screening.hall;
-      const movie = screening.screening.movie;
+      const hall = command.screening.hall;
+      const movie = command.screening.movie;
 
       // Update the movie entity
       const updatedMovie = await this.movieRepository.updateMovie(movie);
       if (!updatedMovie) {
-        throw new Error('Movie not found');
+        throw new Error('Movie not updated');
       }
 
       // Update the hall entity
       const updatedHall = await this.hallRepository.updateHall(hall);
       if (!updatedHall) {
-        throw new Error('Hall not found');
+        throw new Error('Hall not updated');
       }
 
       // Update the screening entity
-      const updatedScreening =
-        await this.screeningRepository.updateScreening(screening);
+      const updatedScreening = await this.screeningRepository.updateScreening(
+        command.screening,
+      );
       if (!updatedScreening) {
-        throw new Error('Screening not found');
+        throw new Error('Screening not updated');
       }
 
       return updatedScreening;
