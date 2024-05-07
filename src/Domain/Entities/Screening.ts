@@ -1,35 +1,43 @@
 import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Movie } from './Movie';
+import { Hall } from './Hall';
 
 @Entity()
 export class Screening {
   @ApiPropertyOptional({
     type: Number,
     description: 'This is an optional property',
-    readOnly: true,
+    readOnly: false,
   })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'screening_id' })
   screeningId: number;
 
   @ApiProperty({
     type: Date,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'date' })
   date: Date;
 
   @ApiProperty({
     type: Date,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'start_time' })
   startTime: Date;
 
   @ApiProperty({
     type: Date,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'end_time' })
   endTime: Date;
 
   @ApiPropertyOptional({
@@ -37,20 +45,22 @@ export class Screening {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt: Date;
 
   @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
-  @Column()
-  fkHallId: number;
+  @ManyToOne(() => Hall)
+  @JoinColumn({ name: 'hall_id' })
+  hall: number;
 
   @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
-  @Column()
-  fkMovieId: number;
+  @ManyToOne(() => Movie)
+  @JoinColumn({ name: 'movie_id' })
+  movie: number;
 }

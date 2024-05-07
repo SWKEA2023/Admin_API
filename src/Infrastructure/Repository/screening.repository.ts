@@ -21,33 +21,13 @@ export class ScreeningRepository {
   }
 
   async getScreenings() {
-    //return this.screeningRepository.find();
-    return this.screeningRepository.query(`SELECT 
-    screening.screeningId, 
-    screening.date, 
-    screening.startTime, 
-    screening.endTime, 
-    screening.createdAt, 
-    JSON_OBJECT(
-        'hallId', hall.hallId, 
-        'hallName', hall.hallName, 
-        'seatRows', hall.seatRows, 
-        'seatNumber', hall.seatNumber
-    ) AS hall, 
-    JSON_OBJECT(
-        'movieId', movie.movieId, 
-        'title', movie.title, 
-        'duration', movie.duration, 
-        'director', movie.director, 
-        'year', movie.year, 
-        'language', movie.language, 
-        'pegi', movie.pegi, 
-        'imageURL', movie.imageURL, 
-        'trailerURL', movie.trailerURL
-    ) AS movie
-FROM screening
-JOIN hall ON screening.fkHallId = hall.hallId
-JOIN movie ON screening.fkMovieId = movie.movieId`);
+    const response = await this.screeningRepository.find({
+      relations: ['hall', 'movie'],
+    });
+
+    console.log(response);
+
+    return response;
   }
 
   async updateScreening(screening: UpdateScreeningCommand) {

@@ -20,8 +20,8 @@ export class ScreeningService {
         screening.date,
         screening.startTime,
         screening.endTime,
-        screening.fkHallId,
-        screening.fkMovieId,
+        screening.movie,
+        screening.hall,
       ),
     );
   }
@@ -41,8 +41,8 @@ export class ScreeningService {
         screening.date,
         screening.startTime,
         screening.endTime,
-        screening.fkHallId,
-        screening.fkMovieId,
+        screening.hall,
+        screening.movie,
       ),
     );
   }
