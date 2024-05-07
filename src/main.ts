@@ -6,8 +6,10 @@ import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 
 function setupSwagger(app: INestApplication): void {
   const documentBuilder = new DocumentBuilder()
-    .setTitle('Nest.js example')
-    .setDescription('This is example for nest.js')
+    .setTitle('Admin API')
+    .setDescription(
+      'This is an API for the admin module of the cinema application.',
+    )
     .setVersion('1.0')
     .addBasicAuth()
     .build();

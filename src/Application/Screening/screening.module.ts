@@ -9,6 +9,8 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { ScreeningRepository } from 'src/Infrastructure/Repository/screening.repository';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import 'dotenv/config';
+import { HallModule } from '../Hall/hall.module';
+import { MovieModule } from '../Movie/movie.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import 'dotenv/config';
         },
       },
     ]),
+    HallModule,
+    MovieModule,
   ],
   providers: [
     ScreeningService,

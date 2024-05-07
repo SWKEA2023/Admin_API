@@ -33,5 +33,6 @@ import 'dotenv/config';
     ...QueryHandlers,
   ],
   controllers: [MovieController],
+  exports: [MovieRepository],
 })
 export class MovieModule {}

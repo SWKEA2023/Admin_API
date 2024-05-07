@@ -1,5 +1,12 @@
 import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
+import { Hall } from './Hall';
 
 @Entity()
 export class Seat {
@@ -44,6 +51,7 @@ export class Seat {
     type: Number,
     description: 'This is a required property',
   })
-  @Column()
+  @ManyToOne(() => Hall)
+  @JoinColumn({ name: 'hallId' })
   fkHallId: number;
 }
