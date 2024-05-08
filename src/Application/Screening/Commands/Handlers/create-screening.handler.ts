@@ -19,27 +19,27 @@ export class CreateScreeningHandler
       const hall = command.screening.hall;
       const movie = command.screening.movie;
 
-      // Update the movie entity
-      const updatedMovie = await this.movieRepository.createMovie(movie);
-      if (!updatedMovie) {
+      // Create the movie entity
+      const createdMovie = await this.movieRepository.createMovie(movie);
+      if (!createdMovie) {
         throw new Error('Movie not created');
       }
 
-      // Update the hall entity
-      const updatedHall = await this.hallRepository.createHall(hall);
-      if (!updatedHall) {
+      // Create the hall entity
+      const createdHall = await this.hallRepository.createHall(hall);
+      if (!createdHall) {
         throw new Error('Hall not created');
       }
 
-      // Update the screening entity
-      const updatedScreening = await this.screeningRepository.createScreening(
+      // Create the screening entity
+      const createdScreening = await this.screeningRepository.createScreening(
         command.screening,
       );
-      if (!updatedScreening) {
+      if (!createdScreening) {
         throw new Error('Screening not created');
       }
 
-      return updatedScreening;
+      return createdScreening;
     } catch (error) {
       throw new Error(`Failed to update screening: ${error.message}`);
     }
