@@ -84,7 +84,7 @@ export class ScreeningController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteScreening(@Param('id') screeningId: number) {
     const response = await this.screeningService.deleteScreening(screeningId);
-    this.client.emit('screening_deleted', response);
+    this.client.emit('screening_deleted', screeningId);
     return response;
   }
 }
