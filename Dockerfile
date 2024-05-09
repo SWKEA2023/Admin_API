@@ -1,30 +1,20 @@
-#Documentation for setting up Dockerfile for local and production
-#https://www.tomray.dev/nestjs-docker-production
+# Base image
+FROM node:20
 
-#Documentation for Dockerfile best practices
-#https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+# Create app directory
+WORKDIR /usr/src/app
 
-#Documentation for volumes --> Access filesystem from the container
-#https://docs.docker.com/storage/volumes/
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
 
-###################
-# LOCAL DEVELOPMENT
-###################
-FROM node:14.16.0-alpine3.13
-RUN addgroup -S app && adduser -S -G app-user app-user
-USER app-user
-WORKDIR /app
-RUN mkdir /app
-COPY package*.json .
+# Install app dependencies
 RUN npm install
 
+# Bundle app source
 COPY . .
-#Set the environment variable
-ENV API_URL=Http://localhost:3001
-EXPOSE 3000
-CMD ["npm", "start"]
 
-###################
-# FOR PRODUCTION
-###################
+# Creates a "dist" folder with the production build
+RUN npm run build
 
+# Start the server using the production build
+CMD ["npm", "run", "start:prod"]
