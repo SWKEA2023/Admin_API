@@ -1,18 +1,18 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Seat } from '../../Domain/Entities/Seat';
-import { CommandHandlers } from '../Seat/Commands/Handlers';
-import { QueryHandlers } from '../Seat/Queries/Handlers';
+import { CommandHandlers } from '../Order/Commands/Handlers';
+import { QueryHandlers } from '../Order/Queries/Handlers';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import 'dotenv/config';
 import { OrderService } from 'src/Domain/Service/order.service';
-import { OrderRepository } from 'src/Infrastructure/Repository/order.repository';
 import { OrderController } from 'src/Interface/Controllers/order.controller';
+import { Order } from 'src/Domain/Entities/Order';
+import { OrderRepository } from 'src/Infrastructure/Repository/order.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Seat]),
+    TypeOrmModule.forFeature([Order]),
     CqrsModule,
     ClientsModule.register([
       {
@@ -27,8 +27,8 @@ import { OrderController } from 'src/Interface/Controllers/order.controller';
     ]),
   ],
   providers: [
-    OrderService,
     OrderRepository,
+    OrderService,
     ...CommandHandlers,
     ...QueryHandlers,
   ],

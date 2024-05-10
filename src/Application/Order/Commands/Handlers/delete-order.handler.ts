@@ -1,12 +1,12 @@
-import { CommandHandler, IQueryHandler } from '@nestjs/cqrs';
+import { CommandHandler } from '@nestjs/cqrs';
 import { DeleteOrderCommand } from '../Impl/delete-order.command';
-import { OrderRepository } from '../../../../Infrastructure/Repository/Order.repository';
+import { OrderRepository } from 'src/Infrastructure/Repository/order.repository';
 
 @CommandHandler(DeleteOrderCommand)
-export class DeleteOrderHandler implements IQueryHandler<DeleteOrderCommand> {
+export class DeleteOrderHandler {
   constructor(private readonly orderRepository: OrderRepository) {}
 
-  async execute(query: DeleteOrderCommand) {
-    return this.orderRepository.deleteOrder(query.orderId);
+  async execute(command: DeleteOrderCommand) {
+    return this.orderRepository.deleteOrder(command.orderId);
   }
 }
