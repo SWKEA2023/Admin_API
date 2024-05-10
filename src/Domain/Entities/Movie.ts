@@ -9,7 +9,7 @@ export class Movie extends AggregateRoot {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'movie_id' })
   movieId: number;
 
   @ApiProperty({
@@ -58,14 +58,14 @@ export class Movie extends AggregateRoot {
     type: String,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'image_url' })
   imageURL: string;
 
   @ApiProperty({
     type: String,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'trailer_url' })
   trailerURL: string;
 
   @ApiPropertyOptional({
@@ -73,6 +73,6 @@ export class Movie extends AggregateRoot {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt: Date;
 }

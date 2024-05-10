@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SeatService } from '../../Domain/Service/seat.service';
-import { SeatController } from '../../Interface/Controllers/seat.controller';
 import { Seat } from '../../Domain/Entities/Seat';
 import { CommandHandlers } from '../Seat/Commands/Handlers';
 import { QueryHandlers } from '../Seat/Queries/Handlers';
 import { CqrsModule } from '@nestjs/cqrs';
-import { SeatRepository } from 'src/Infrastructure/Repository/seat.repository';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import 'dotenv/config';
+import { OrderService } from 'src/Domain/Service/order.service';
+import { OrderRepository } from 'src/Infrastructure/Repository/order.repository';
+import { OrderController } from 'src/Interface/Controllers/order.controller';
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import 'dotenv/config';
     CqrsModule,
     ClientsModule.register([
       {
-        name: 'SEAT_QUEUE',
+        name: 'ORDER_QUEUE',
         transport: Transport.RMQ,
         options: {
           urls: [process.env.RMQ_URL],
@@ -27,11 +27,11 @@ import 'dotenv/config';
     ]),
   ],
   providers: [
-    SeatService,
-    SeatRepository,
+    OrderService,
+    OrderRepository,
     ...CommandHandlers,
     ...QueryHandlers,
   ],
-  controllers: [SeatController],
+  controllers: [OrderController],
 })
-export class SeatModule {}
+export class OrderModule {}

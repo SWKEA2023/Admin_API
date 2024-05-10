@@ -15,21 +15,21 @@ export class Seat {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'seat_id' })
   seatId: number;
 
   @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'seat_row' })
   seatRow: number;
 
   @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'seat_number' })
   seatNumber: number;
 
   @ApiProperty({
@@ -44,14 +44,14 @@ export class Seat {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt: Date;
 
   @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
-  @ManyToOne(() => Hall)
-  @JoinColumn({ name: 'hallId' })
-  fkHallId: number;
+  @ManyToOne(() => Hall, (hall) => hall, { onDelete: 'NO ACTION' })
+  @JoinColumn({ name: 'fk_hall_id', referencedColumnName: 'hallId' })
+  hall: Hall;
 }

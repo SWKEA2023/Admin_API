@@ -1,5 +1,12 @@
 import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinColumn,
+  JoinTable,
+} from 'typeorm';
 import { Order } from './Order';
 
 @Entity()
@@ -9,14 +16,14 @@ export class Product {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'product_id' })
   productId: number;
 
   @ApiProperty({
     type: String,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'product_name' })
   productName: string;
 
   @ApiProperty({
@@ -37,18 +44,17 @@ export class Product {
     type: Date,
     description: 'This is a optional property',
   })
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt: Date;
 
   @ApiPropertyOptional({
     type: Order,
     description: 'This is a optional property',
   })
-  @ManyToMany(
-    () => Order,
-    order => order.products,
-    {onDelete: 'NO ACTION', onUpdate: 'NO ACTION',},
-  )
+  @ManyToMany(() => Order, (order) => order.products, {
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+  })
   @JoinColumn()
   @JoinTable({
     name: 'product_order',

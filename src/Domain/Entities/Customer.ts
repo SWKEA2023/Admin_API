@@ -9,35 +9,35 @@ export class Customer extends AggregateRoot {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'customer_id' })
   customerId: number;
 
   @ApiProperty({
     type: String,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'first_name' })
   firstName: string;
 
   @ApiProperty({
     type: String,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'last_name' })
   lastName: string;
 
   @ApiProperty({
     type: String,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'email' })
   email: string;
 
   @ApiProperty({
     type: String,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'phone_number' })
   phoneNumber: string;
 
   @ApiPropertyOptional({
@@ -45,6 +45,6 @@ export class Customer extends AggregateRoot {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt: Date;
 }

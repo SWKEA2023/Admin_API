@@ -1,5 +1,14 @@
 import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Order } from './Order';
+import { Seat } from './Seat';
+import { Screening } from './Screening';
 
 @Entity()
 export class Ticket {
@@ -8,34 +17,42 @@ export class Ticket {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'ticket_id' })
   ticketId: number;
 
   @ApiProperty({
     type: Date,
     description: 'This is a required property',
   })
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt: Date;
 
   @ApiProperty({
-    type: Number,
-    description: 'This is a required property',
+    type: Screening,
+    description: 'This is a required property for a screening',
   })
-  @Column()
-  fkScreeningId: number;
+  @ManyToOne(() => Screening, (screening) => screening, {
+    onDelete: 'NO ACTION',
+  })
+  @JoinColumn({ name: 'fk_screening_id', referencedColumnName: 'screeningId' })
+  screening: Screening;
 
   @ApiProperty({
-    type: Number,
-    description: 'This is a required property',
+    type: Order,
+    description: 'This is a required property for an order',
   })
-  @Column()
-  fkOrderId: number;
+  @ManyToOne(() => Order, (order) => order, { onDelete: 'NO ACTION' })
+  @JoinColumn({
+    name: 'fk_order_id',
+    referencedColumnName: 'orderId',
+  })
+  order: Order;
 
   @ApiProperty({
-    type: Number,
-    description: 'This is a required property',
+    type: Seat,
+    description: 'This is a required property for a seat',
   })
-  @Column()
-  fkSeatId: number;
+  @ManyToOne(() => Seat, (seat) => seat, { onDelete: 'NO ACTION' })
+  @JoinColumn({ name: 'fk_seat_id', referencedColumnName: 'seatId' })
+  seat: Seat;
 }

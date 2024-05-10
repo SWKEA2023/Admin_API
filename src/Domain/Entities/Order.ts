@@ -1,6 +1,14 @@
 import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Product } from './Product';
+import { Customer } from './Customer';
 
 @Entity()
 export class Order {
@@ -20,16 +28,17 @@ export class Order {
   createdAt: Date;
 
   @ApiProperty({
-    type: Number,
+    type: Customer,
     description: 'This is a required property',
   })
-  @Column()
-  fkCustomerId: number;
+  @ManyToOne(() => Customer, (customer) => customer, {
+    onDelete: 'NO ACTION',
+  })
+  @JoinColumn({ name: 'fk_customer_id', referencedColumnName: 'customerId' })
+  customer: Customer;
 
-  @ManyToMany(
-    () => Product,
-    (product) => product.orders,
-    {onDelete: 'NO ACTION', onUpdate: 'NO ACTION',},
-  )
-    products: Product[];
+  @ManyToMany(() => Product, (product) => product.orders, {
+    onDelete: 'NO ACTION',
+  })
+  products: Product[];
 }
