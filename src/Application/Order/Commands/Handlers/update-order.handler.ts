@@ -6,7 +6,7 @@ import { UpdateOrderCommand } from '../Impl/update-order.command';
 export class UpdateOrderHandler implements ICommandHandler<UpdateOrderCommand> {
   constructor(private readonly orderRepository: OrderRepository) {}
 
-  async execute(order: UpdateOrderCommand) {
-    return this.orderRepository.updateOrder(order);
+  async execute(command: UpdateOrderCommand) {
+    return this.orderRepository.updateOrder(command.order);
   }
 }

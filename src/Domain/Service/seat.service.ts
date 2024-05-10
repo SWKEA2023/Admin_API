@@ -15,14 +15,7 @@ export class SeatService {
   ) {}
 
   async createSeat(seat: Seat) {
-    return this.commandBus.execute(
-      new CreateSeatCommand(
-        seat.seatNumber,
-        seat.seatRow,
-        seat.price,
-        seat.fkHallId,
-      ),
-    );
+    return this.commandBus.execute(new CreateSeatCommand(seat));
   }
 
   async getSeat(seatId: number) {
@@ -34,15 +27,7 @@ export class SeatService {
   }
 
   async updateSeat(seat: Seat) {
-    return this.commandBus.execute(
-      new UpdateSeatCommand(
-        seat.seatId,
-        seat.seatNumber,
-        seat.seatRow,
-        seat.price,
-        seat.fkHallId,
-      ),
-    );
+    return this.commandBus.execute(new UpdateSeatCommand(seat));
   }
 
   async deleteSeat(seatId: number) {

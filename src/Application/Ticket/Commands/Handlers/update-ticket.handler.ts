@@ -8,7 +8,7 @@ export class UpdateTicketHandler
 {
   constructor(private readonly ticketRepository: TicketRepository) {}
 
-  async execute(ticket: UpdateTicketCommand) {
-    return this.ticketRepository.updateTicket(ticket);
+  async execute(command: UpdateTicketCommand) {
+    return this.ticketRepository.updateTicket(command.ticket);
   }
 }

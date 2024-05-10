@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { OrderService } from '../../Domain/Service/order.service';
 import { Order } from '../../Domain/Entities/Order';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -67,5 +67,10 @@ export class OrderController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteOrder(@Param('id') orderId: number) {
     return this.orderService.getOrder(orderId);
+  }
+
+  @MessagePattern('created_order')
+  async orderRecived(data: any) {
+    console.log('Order Recived', data);
   }
 }

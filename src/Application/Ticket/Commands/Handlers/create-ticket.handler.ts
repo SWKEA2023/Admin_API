@@ -9,6 +9,6 @@ export class CreateTicketHandler
   constructor(private readonly ticketRepository: TicketRepository) {}
 
   async execute(command: CreateTicketCommand) {
-    return this.ticketRepository.createTicket(command);
+    return this.ticketRepository.createTicket(command.ticket);
   }
 }

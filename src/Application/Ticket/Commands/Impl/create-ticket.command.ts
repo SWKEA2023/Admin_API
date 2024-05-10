@@ -1,7 +1,5 @@
+import { Ticket } from 'src/Domain/Entities/Ticket';
+
 export class CreateTicketCommand {
-  constructor(
-    public readonly fkScreeningId: number,
-    public readonly fkOrderId: number,
-    public readonly fkSeatId: number,
-  ) {}
+  constructor(public ticket: Ticket) {}
 }

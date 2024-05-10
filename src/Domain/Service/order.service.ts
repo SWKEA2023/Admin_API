@@ -15,7 +15,7 @@ export class OrderService {
   ) {}
 
   async createOrder(order: Order) {
-    return this.commandBus.execute(new CreateOrderCommand(order.fkCustomerId));
+    return this.commandBus.execute(new CreateOrderCommand(order));
   }
 
   async getOrder(orderId: number) {
@@ -27,9 +27,7 @@ export class OrderService {
   }
 
   async updateOrder(order: Order) {
-    return this.commandBus.execute(
-      new UpdateOrderCommand(order.orderId, order.fkCustomerId),
-    );
+    return this.commandBus.execute(new UpdateOrderCommand(order));
   }
 
   async deleteOrder(orderId: number) {

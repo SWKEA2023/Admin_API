@@ -1,6 +1,5 @@
+import { Order } from 'src/Domain/Entities/Order';
+
 export class UpdateOrderCommand {
-  constructor(
-    public readonly orderId: number,
-    public readonly fkCustomerId: number,
-  ) {}
+  constructor(public readonly order: Order) {}
 }

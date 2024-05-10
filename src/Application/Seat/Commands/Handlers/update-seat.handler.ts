@@ -6,7 +6,7 @@ import { UpdateSeatCommand } from '../Impl/update-seat.command';
 export class UpdateSeatHandler implements ICommandHandler<UpdateSeatCommand> {
   constructor(private readonly seatRepository: SeatRepository) {}
 
-  async execute(seat: UpdateSeatCommand) {
-    return this.seatRepository.updateSeat(seat);
+  async execute(command: UpdateSeatCommand) {
+    return this.seatRepository.updateSeat(command.seat);
   }
 }

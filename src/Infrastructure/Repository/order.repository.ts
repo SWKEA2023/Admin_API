@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateOrderCommand } from 'src/Application/Order/Commands/Impl/create-order.command';
-import { UpdateOrderCommand } from 'src/Application/Order/Commands/Impl/update-order.command';
 import { Order } from 'src/Domain/Entities/Order';
 import { Repository } from 'typeorm';
 
@@ -12,7 +10,7 @@ export class OrderRepository {
     private readonly orderRepository: Repository<Order>,
   ) {}
 
-  async createOrder(order: CreateOrderCommand) {
+  async createOrder(order: Order) {
     return this.orderRepository.save(order);
   }
 
@@ -24,7 +22,7 @@ export class OrderRepository {
     return this.orderRepository.find();
   }
 
-  async updateOrder(order: UpdateOrderCommand) {
+  async updateOrder(order: Order) {
     return this.orderRepository.save(order);
   }
 

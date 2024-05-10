@@ -20,7 +20,7 @@ import { OrderController } from 'src/Interface/Controllers/order.controller';
         transport: Transport.RMQ,
         options: {
           urls: [process.env.RMQ_URL],
-          queue: process.env.RMQ_QUEUE,
+          queue: 'test_admin_queue',
           queueOptions: { durable: true },
         },
       },
