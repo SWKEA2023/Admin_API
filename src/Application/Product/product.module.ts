@@ -20,7 +20,7 @@ import 'dotenv/config';
         transport: Transport.RMQ,
         options: {
           urls: [process.env.RMQ_URL],
-          queue: process.env.RMQ_QUEUE,
+          queue: process.env.RMQ_QUEUE_PUBLISH,
           queueOptions: { durable: true },
         },
       },

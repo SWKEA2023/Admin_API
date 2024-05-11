@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { OrderService } from '../../Domain/Service/order.service';
 import { Order } from '../../Domain/Entities/Order';
-import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -9,16 +8,13 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { MessagePattern } from '@nestjs/microservices';
 
 @ApiBearerAuth()
 @ApiTags('Orders')
 @Controller('order')
 export class OrderController {
-  constructor(
-    private readonly orderService: OrderService,
-    @Inject('ORDER_QUEUE')
-    private readonly client: ClientProxy,
-  ) {}
+  constructor(private readonly orderService: OrderService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create order' })
@@ -69,8 +65,9 @@ export class OrderController {
     return this.orderService.getOrder(orderId);
   }
 
-  @MessagePattern('created_order')
-  async orderRecived(data: any) {
-    console.log('Order Recived', data);
+  @MessagePattern('asd_list')
+  async screeningsList(data: any) {
+    console.log('screenings_list', data);
+    return data;
   }
 }
