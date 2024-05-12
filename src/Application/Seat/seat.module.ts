@@ -33,5 +33,6 @@ import 'dotenv/config';
     ...QueryHandlers,
   ],
   controllers: [SeatController],
+  exports: [SeatRepository],
 })
 export class SeatModule {}

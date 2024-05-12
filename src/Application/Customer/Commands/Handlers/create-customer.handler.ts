@@ -9,6 +9,6 @@ export class CreateCustomerHandler
   constructor(private readonly customerRepository: CustomerRepository) {}
 
   async execute(command: CreateCustomerCommand) {
-    return this.customerRepository.createCustomer(command);
+    return this.customerRepository.createCustomer(command.customer);
   }
 }

@@ -14,6 +14,10 @@ export class SeatRepository {
     return this.seatRepository.save(seat);
   }
 
+  // async createSeats(seats: Seat[]) {
+  //   return this.seatRepository.save(seats);
+  // }
+
   async getSeat(seatId: number) {
     return this.seatRepository.findOneBy({ seatId: seatId });
   }

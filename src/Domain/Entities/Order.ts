@@ -18,14 +18,14 @@ export class Order {
     readOnly: true,
   })
   @PrimaryGeneratedColumn()
-  orderId: number;
+  orderId?: number;
 
   @ApiProperty({
     type: Date,
     description: 'This is a required property',
   })
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt?: Date;
 
   @ApiProperty({
     type: Customer,
@@ -40,5 +40,5 @@ export class Order {
   @ManyToMany(() => Product, (product) => product.orders, {
     onDelete: 'NO ACTION',
   })
-  products: Product[];
+  products?: Product[];
 }

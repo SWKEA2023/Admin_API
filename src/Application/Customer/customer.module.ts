@@ -33,5 +33,6 @@ import { CustomerRepository } from 'src/Infrastructure/Repository/customer.repos
     ...QueryHandlers,
   ],
   controllers: [CustomerController],
+  exports: [CustomerRepository],
 })
 export class CustomerModule {}

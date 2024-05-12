@@ -10,7 +10,8 @@ export class TicketRepository {
   ) {}
 
   async createTicket(ticket: Ticket) {
-    return this.ticketRepository.save(ticket);
+    const ticketCreated = await this.ticketRepository.save(ticket);
+    return ticketCreated;
   }
 
   async getTicket(ticketId: number) {

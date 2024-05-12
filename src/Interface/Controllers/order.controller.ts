@@ -8,7 +8,6 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { MessagePattern } from '@nestjs/microservices';
 
 @ApiBearerAuth()
 @ApiTags('Orders')
@@ -63,11 +62,5 @@ export class OrderController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteOrder(@Param('id') orderId: number) {
     return this.orderService.getOrder(orderId);
-  }
-
-  @MessagePattern('asd_list')
-  async screeningsList(data: any) {
-    console.log('screenings_list', data);
-    return data;
   }
 }

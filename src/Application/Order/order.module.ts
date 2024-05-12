@@ -9,24 +9,14 @@ import { OrderController } from 'src/Interface/Controllers/order.controller';
 import { Order } from 'src/Domain/Entities/Order';
 import { OrderRepository } from 'src/Infrastructure/Repository/order.repository';
 import { ConfigModule } from '@nestjs/config';
+import { CustomerModule } from '../Customer/customer.module';
 
 @Module({
   imports: [
     CqrsModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forFeature([Order]),
-    CqrsModule,
-    // ClientsModule.register([
-    //   {
-    //     name: 'ORDER_QUEUE',
-    //     transport: Transport.RMQ,
-    //     options: {
-    //       urls: ['amqp://admin:password123@0.0.0.0:5672/my_vhost'],
-    //       queue: 'Elastic_QUEUE',
-    //       queueOptions: { durable: true },
-    //     },
-    //   },
-    // ]),
+    CustomerModule,
   ],
   providers: [
     OrderRepository,
@@ -35,5 +25,6 @@ import { ConfigModule } from '@nestjs/config';
     ...QueryHandlers,
   ],
   controllers: [OrderController],
+  exports: [OrderRepository],
 })
 export class OrderModule {}

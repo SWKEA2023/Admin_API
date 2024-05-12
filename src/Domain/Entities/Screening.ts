@@ -14,7 +14,7 @@ export class Screening {
   @ApiPropertyOptional({
     type: Number,
     description: 'This is an optional property',
-    readOnly: false,
+    readOnly: true,
   })
   @PrimaryGeneratedColumn({ name: 'screening_id' })
   screeningId: number;

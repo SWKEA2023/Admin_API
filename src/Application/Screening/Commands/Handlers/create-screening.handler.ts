@@ -16,20 +16,20 @@ export class CreateScreeningHandler
 
   async execute(command: CreateScreeningCommand) {
     try {
-      const hall = command.screening.hall;
-      const movie = command.screening.movie;
+      // const hall = command.screening.hall;
+      // const movie = command.screening.movie;
 
-      // Create the movie entity
-      const createdMovie = await this.movieRepository.createMovie(movie);
-      if (!createdMovie) {
-        throw new Error('Movie not created');
-      }
+      // // Create the movie entity
+      // const createdMovie = await this.movieRepository.createMovie(movie);
+      // if (!createdMovie) {
+      //   throw new Error('Movie not created');
+      // }
 
-      // Create the hall entity
-      const createdHall = await this.hallRepository.createHall(hall);
-      if (!createdHall) {
-        throw new Error('Hall not created');
-      }
+      // // Create the hall entity
+      // const createdHall = await this.hallRepository.createHall(hall);
+      // if (!createdHall) {
+      //   throw new Error('Hall not created');
+      // }
 
       // Create the screening entity
       const createdScreening = await this.screeningRepository.createScreening(

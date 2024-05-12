@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateCustomerCommand } from 'src/Application/Customer/Commands/Impl/create-customer.command';
 import { UpdateCustomerCommand } from 'src/Application/Customer/Commands/Impl/update-customer.command';
 import { Customer } from 'src/Domain/Entities/Customer';
 import { Repository } from 'typeorm';
@@ -12,7 +11,7 @@ export class CustomerRepository {
     private readonly customerRepository: Repository<Customer>,
   ) {}
 
-  async createCustomer(customer: CreateCustomerCommand) {
+  async createCustomer(customer: Customer) {
     return this.customerRepository.save(customer);
   }
 
