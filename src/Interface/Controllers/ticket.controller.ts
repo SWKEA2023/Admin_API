@@ -72,7 +72,12 @@ export class TicketController {
   @MessagePattern('created_order')
   async screeningsList(data: any) {
     const ticketCreated = await this.ticketService.createTicket(data);
-    console.log('Ticket created', ticketCreated);
-    
+
+    if (ticketCreated) {
+      this.client.emit('ticket_created', ticketCreated);
+      console.log('Ticket created', ticketCreated);
+    } else {
+      console.log('Ticket not created');
+    }
   }
 }
