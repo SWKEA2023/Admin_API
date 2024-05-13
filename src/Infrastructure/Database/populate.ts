@@ -27,11 +27,10 @@ AppDataSource.initialize()
 
     const manager = connection.manager;
 
-
     await manager.delete(Ticket, {});
-    await manager.delete(Order, {}); 
-    await manager.delete(Screening, {}); 
-    await manager.delete(Seat, {}); 
+    await manager.delete(Order, {});
+    await manager.delete(Screening, {});
+    await manager.delete(Seat, {});
     await manager.delete(Customer, {});
     await manager.delete(Movie, {});
     await manager.delete(Product, {});
