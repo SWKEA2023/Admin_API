@@ -1,37 +1,30 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SeatService } from '../../Domain/Service/seat.service';
-import { SeatController } from '../../Interface/Controllers/seat.controller';
-import { Seat } from '../../Domain/Entities/Seat';
-import { CommandHandlers } from '../Seat/Commands/Handlers';
-import { QueryHandlers } from '../Seat/Queries/Handlers';
+import { CommandHandlers } from '../Order/Commands/Handlers';
+import { QueryHandlers } from '../Order/Queries/Handlers';
 import { CqrsModule } from '@nestjs/cqrs';
-import { SeatRepository } from 'src/Infrastructure/Repository/seat.repository';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import 'dotenv/config';
+// import { ClientsModule, Transport } from '@nestjs/microservices';
+import { OrderService } from 'src/Domain/Service/order.service';
+import { OrderController } from 'src/Interface/Controllers/order.controller';
+import { Order } from 'src/Domain/Entities/Order';
+import { OrderRepository } from 'src/Infrastructure/Repository/order.repository';
+import { ConfigModule } from '@nestjs/config';
+import { CustomerModule } from '../Customer/customer.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Seat]),
     CqrsModule,
-    ClientsModule.register([
-      {
-        name: 'SEAT_QUEUE',
-        transport: Transport.RMQ,
-        options: {
-          urls: [process.env.RMQ_URL],
-          queue: process.env.RMQ_QUEUE,
-          queueOptions: { durable: true },
-        },
-      },
-    ]),
+    ConfigModule.forRoot(),
+    TypeOrmModule.forFeature([Order]),
+    CustomerModule,
   ],
   providers: [
-    SeatService,
-    SeatRepository,
+    OrderRepository,
+    OrderService,
     ...CommandHandlers,
     ...QueryHandlers,
   ],
-  controllers: [SeatController],
+  controllers: [OrderController],
+  exports: [OrderRepository],
 })
-export class SeatModule {}
+export class OrderModule {}

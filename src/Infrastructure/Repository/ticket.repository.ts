@@ -2,9 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Ticket } from '../../Domain/Entities/Ticket';
-import { CreateTicketCommand } from 'src/Application/Ticket/Commands/Impl/create-ticket.command';
-import { UpdateTicketCommand } from 'src/Application/Ticket/Commands/Impl/update-ticket.command';
-
 @Injectable()
 export class TicketRepository {
   constructor(
@@ -12,8 +9,9 @@ export class TicketRepository {
     private readonly ticketRepository: Repository<Ticket>,
   ) {}
 
-  async createTicket(ticket: CreateTicketCommand) {
-    return this.ticketRepository.save(ticket);
+  async createTicket(ticket: Ticket) {
+    const ticketCreated = await this.ticketRepository.save(ticket);
+    return ticketCreated;
   }
 
   async getTicket(ticketId: number) {
@@ -24,7 +22,7 @@ export class TicketRepository {
     return this.ticketRepository.find();
   }
 
-  async updateTicket(ticket: UpdateTicketCommand) {
+  async updateTicket(ticket: Ticket) {
     return this.ticketRepository.save(ticket);
   }
 

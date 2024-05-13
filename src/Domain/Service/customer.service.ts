@@ -16,12 +16,7 @@ export class CustomerService {
 
   async createCustomer(customer: Customer) {
     return this.commandBus.execute(
-      new CreateCustomerCommand(
-        customer.firstName,
-        customer.lastName,
-        customer.email,
-        customer.phoneNumber,
-      ),
+      new CreateCustomerCommand(customer),
     );
   }
 

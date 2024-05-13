@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { TicketService } from '../../Domain/Service/ticket.service';
 import { Ticket } from '../../Domain/Entities/Ticket';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -67,5 +67,17 @@ export class TicketController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async deleteTicket(@Param('id') ticketId: number) {
     return this.ticketService.deleteTicket(ticketId);
+  }
+
+  @MessagePattern('created_order')
+  async screeningsList(data: any) {
+    const ticketCreated = await this.ticketService.createTicket(data);
+
+    if (ticketCreated) {
+      this.client.emit('ticket_created', ticketCreated);
+      console.log('Ticket created', ticketCreated);
+    } else {
+      console.log('Ticket not created');
+    }
   }
 }

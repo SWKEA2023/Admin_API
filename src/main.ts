@@ -3,6 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+import { ConfigService } from '@nestjs/config';
 
 function setupSwagger(app: INestApplication): void {
   const documentBuilder = new DocumentBuilder()
@@ -20,12 +21,15 @@ function setupSwagger(app: INestApplication): void {
 }
 
 async function bootstrap() {
+  const configService = new ConfigService();
+
   const app = await NestFactory.create(AppModule);
+
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.RMQ,
     options: {
-      urls: [process.env.RMQ_URL],
-      queue: process.env.RMQ_QUEUE,
+      urls: [configService.get('RMQ_URL') as string],
+      queue: configService.get('RMQ_QUEUE_CONSUME'),
       queueOptions: {
         durable: true,
       },
@@ -34,6 +38,7 @@ async function bootstrap() {
 
   setupSwagger(app);
   await app.listen(3000);
+  await app.startAllMicroservices();
 }
 
 bootstrap();

@@ -14,17 +14,17 @@ export class Screening {
   @ApiPropertyOptional({
     type: Number,
     description: 'This is an optional property',
-    readOnly: false,
+    readOnly: true,
   })
   @PrimaryGeneratedColumn({ name: 'screening_id' })
   screeningId: number;
 
-  @ApiProperty({
-    type: Date,
-    description: 'This is a required property',
-  })
-  @Column({ name: 'date' })
-  date: Date;
+  // @ApiProperty({
+  //   type: Date,
+  //   description: 'This is a required property',
+  // })
+  // @Column({ name: 'date' })
+  // date: Date;
 
   @ApiProperty({
     type: Date,

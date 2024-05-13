@@ -1,8 +1,5 @@
+import { Customer } from "src/Domain/Entities/Customer";
+
 export class CreateCustomerCommand {
-  constructor(
-    public readonly firstName: string,
-    public readonly lastName: string,
-    public readonly email: string,
-    public readonly phoneNumber: string,
-  ) {}
+  constructor(public readonly customer: Customer) {}
 }

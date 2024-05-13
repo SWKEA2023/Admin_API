@@ -6,6 +6,7 @@ import { GetScreeningsQuery } from '../../Application/Screening/Queries/Impl/get
 import { Injectable } from '@nestjs/common';
 import { UpdateScreeningCommand } from 'src/Application/Screening/Commands/Impl/update-screening.command';
 import { DeleteScreeningCommand } from 'src/Application/Screening/Commands/Impl/delete-screening.command';
+import { ScreeningDTO } from '../Entities/ScreeningDTO';
 
 @Injectable()
 export class ScreeningService {
@@ -14,7 +15,7 @@ export class ScreeningService {
     private readonly queryBus: QueryBus,
   ) {}
 
-  async createScreening(screening: Screening) {
+  async createScreening(screening: ScreeningDTO) {
     return this.commandBus.execute(new CreateScreeningCommand(screening));
   }
 

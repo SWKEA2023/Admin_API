@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateSeatCommand } from 'src/Application/Seat/Commands/Impl/create-seat.command';
-import { UpdateSeatCommand } from 'src/Application/Seat/Commands/Impl/update-seat.command';
 import { Seat } from 'src/Domain/Entities/Seat';
 import { Repository } from 'typeorm';
 
@@ -12,9 +10,13 @@ export class SeatRepository {
     private readonly seatRepository: Repository<Seat>,
   ) {}
 
-  async createSeat(seat: CreateSeatCommand) {
+  async createSeat(seat: Seat) {
     return this.seatRepository.save(seat);
   }
+
+  // async createSeats(seats: Seat[]) {
+  //   return this.seatRepository.save(seats);
+  // }
 
   async getSeat(seatId: number) {
     return this.seatRepository.findOneBy({ seatId: seatId });
@@ -24,7 +26,7 @@ export class SeatRepository {
     return this.seatRepository.find();
   }
 
-  async updateSeat(seat: UpdateSeatCommand) {
+  async updateSeat(seat: Seat) {
     return this.seatRepository.save(seat);
   }
 

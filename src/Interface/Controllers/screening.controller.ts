@@ -9,6 +9,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { ScreeningDTO } from 'src/Domain/Entities/ScreeningDTO';
 
 @ApiBearerAuth()
 @ApiTags('Screenings')
@@ -28,7 +29,7 @@ export class ScreeningController {
     type: Screening,
     description: 'The record has been successfully created',
   })
-  async createScreening(@Body() screening: Screening) {
+  async createScreening(@Body() screening: ScreeningDTO) {
     const response = await this.screeningService.createScreening(screening);
     this.client.emit('screening_created', response);
     return response;

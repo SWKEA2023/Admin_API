@@ -7,6 +7,6 @@ export class CreateOrderHandler implements ICommandHandler<CreateOrderCommand> {
   constructor(private readonly orderRepository: OrderRepository) {}
 
   async execute(command: CreateOrderCommand) {
-    return this.orderRepository.createOrder(command);
+    return this.orderRepository.createOrder(command.order);
   }
 }

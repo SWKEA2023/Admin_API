@@ -9,28 +9,28 @@ export class Hall extends AggregateRoot {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'hall_id' })
   hallId: number;
 
   @ApiProperty({
     type: String,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'hall_name' })
   hallName: string;
 
   @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'seat_rows' })
   seatRows: number;
 
   @ApiProperty({
     type: Number,
     description: 'This is a required property',
   })
-  @Column()
+  @Column({ name: 'seat_numbers' })
   seatNumber: number;
 
   @ApiPropertyOptional({
@@ -38,6 +38,6 @@ export class Hall extends AggregateRoot {
     description: 'This is an optional property',
     readOnly: true,
   })
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   createdAt: Date;
 }

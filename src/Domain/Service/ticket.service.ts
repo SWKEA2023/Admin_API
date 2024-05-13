@@ -15,13 +15,7 @@ export class TicketService {
   ) {}
 
   async createTicket(ticket: Ticket) {
-    return this.commandBus.execute(
-      new CreateTicketCommand(
-        ticket.fkScreeningId,
-        ticket.fkOrderId,
-        ticket.fkSeatId,
-      ),
-    );
+    return this.commandBus.execute(new CreateTicketCommand(ticket));
   }
 
   async getTicket(ticketId: number) {
@@ -33,14 +27,7 @@ export class TicketService {
   }
 
   async updateTicket(ticket: Ticket) {
-    return this.commandBus.execute(
-      new UpdateTicketCommand(
-        ticket.ticketId,
-        ticket.fkScreeningId,
-        ticket.fkOrderId,
-        ticket.fkSeatId,
-      ),
-    );
+    return this.commandBus.execute(new UpdateTicketCommand(ticket));
   }
 
   async deleteTicket(ticketId: number) {

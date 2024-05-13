@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { ProductService } from '../../Domain/Service/product.service';
 import { Product } from '../../Domain/Entities/Product';
-import { ClientProxy, MessagePattern } from '@nestjs/microservices';
+import { ClientProxy } from '@nestjs/microservices';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -57,11 +57,11 @@ export class ProductController {
     return this.productService.getProducts();
   }
 
-  @MessagePattern('get_all_products')
-  async getProductsEs() {
-    const response = this.productService.getProducts();
-    this.client.emit('products_list', response);
-  }
+  // @MessagePattern('get_all_products')
+  // async getProductsEs() {
+  //   const response = this.productService.getProducts();
+  //   this.client.emit('products_list', response);
+  // }
 
   @Post('update')
   @ApiOperation({ summary: 'Update product' })

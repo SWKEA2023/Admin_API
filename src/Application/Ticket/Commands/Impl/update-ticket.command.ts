@@ -1,8 +1,5 @@
+import { Ticket } from 'src/Domain/Entities/Ticket';
+
 export class UpdateTicketCommand {
-  constructor(
-    public readonly ticketId: number,
-    public readonly fkScreeningId: number,
-    public readonly fkOrderId: number,
-    public readonly fkSeatId: number,
-  ) {}
+  constructor(public ticket: Ticket) {}
 }

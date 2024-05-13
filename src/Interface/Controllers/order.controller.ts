@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { OrderService } from '../../Domain/Service/order.service';
 import { Order } from '../../Domain/Entities/Order';
-import { ClientProxy } from '@nestjs/microservices';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -14,11 +13,7 @@ import {
 @ApiTags('Orders')
 @Controller('order')
 export class OrderController {
-  constructor(
-    private readonly orderService: OrderService,
-    @Inject('ORDER_QUEUE')
-    private readonly client: ClientProxy,
-  ) {}
+  constructor(private readonly orderService: OrderService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create order' })

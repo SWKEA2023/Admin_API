@@ -1,5 +1,5 @@
-import { Screening } from 'src/Domain/Entities/Screening';
+import { ScreeningDTO } from 'src/Domain/Entities/ScreeningDTO';
 
 export class CreateScreeningCommand {
-  constructor(public readonly screening: Screening) {}
+  constructor(public readonly screening: ScreeningDTO) {}
 }

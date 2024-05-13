@@ -7,6 +7,6 @@ export class CreateSeatHandler implements ICommandHandler<CreateSeatCommand> {
   constructor(private readonly seatRepository: SeatRepository) {}
 
   async execute(command: CreateSeatCommand) {
-    return this.seatRepository.createSeat(command);
+    return this.seatRepository.createSeat(command.seat);
   }
 }
