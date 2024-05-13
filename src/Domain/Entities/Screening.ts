@@ -19,12 +19,12 @@ export class Screening {
   @PrimaryGeneratedColumn({ name: 'screening_id' })
   screeningId: number;
 
-  @ApiProperty({
-    type: Date,
-    description: 'This is a required property',
-  })
-  @Column({ name: 'date' })
-  date: Date;
+  // @ApiProperty({
+  //   type: Date,
+  //   description: 'This is a required property',
+  // })
+  // @Column({ name: 'date' })
+  // date: Date;
 
   @ApiProperty({
     type: Date,
