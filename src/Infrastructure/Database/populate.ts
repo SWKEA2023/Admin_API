@@ -27,14 +27,15 @@ AppDataSource.initialize()
 
     const manager = connection.manager;
 
-    // await manager.clear(Ticket);
-    // await manager.clear(Order);
-    // await manager.clear(Seat);
-    // await manager.clear(Screening);
-    // await manager.clear(Hall);
-    // await manager.clear(Customer);
-    // await manager.clear(Movie);
-    // await manager.clear(Product);
+
+    await manager.delete(Ticket, {});
+    await manager.delete(Order, {}); 
+    await manager.delete(Screening, {}); 
+    await manager.delete(Seat, {}); 
+    await manager.delete(Customer, {});
+    await manager.delete(Movie, {});
+    await manager.delete(Product, {});
+    await manager.delete(Hall, {});
 
     // Create a new customer
     const customer = new Customer();
