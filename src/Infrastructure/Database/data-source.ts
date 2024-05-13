@@ -19,5 +19,5 @@ export const dataSource: DataSourceOptions = {
   password: configService.get<string>('DB_PASSWORD'),
   database: configService.get<string>('DB_DATABASE'),
   entities: [Movie, Hall, Customer, Seat, Screening, Ticket, Order, Product],
-  synchronize: true,
+  synchronize: false,
 };

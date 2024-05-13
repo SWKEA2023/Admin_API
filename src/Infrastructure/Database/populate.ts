@@ -1,4 +1,4 @@
-import { exit } from 'process';
+import 'dotenv/config';
 import 'reflect-metadata';
 import { Customer } from '../../Domain/Entities/Customer';
 import { Movie } from '../../Domain/Entities/Movie';
@@ -12,11 +12,11 @@ import { Product } from '../../Domain/Entities/Product';
 
 const AppDataSource = new DataSource({
   type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'root',
-  password: '1234',
-  database: 'scrum_hub',
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_DBPORT),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
   synchronize: true,
   entities: ['src/Domain/Entities/*.ts'],
 });
@@ -35,7 +35,6 @@ AppDataSource.initialize()
     // await manager.clear(Customer);
     // await manager.clear(Movie);
     // await manager.clear(Product);
-    
 
     // Create a new customer
     const customer = new Customer();
@@ -208,7 +207,7 @@ AppDataSource.initialize()
     ticket.seat = seat;
     await manager.save(ticket);
 
-    exit();
+    await connection.close();
   })
   .catch((error) => {
     console.error(error);
