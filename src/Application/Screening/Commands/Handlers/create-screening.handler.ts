@@ -3,6 +3,7 @@ import { CreateScreeningCommand } from '../Impl/create-screening.command';
 import { ScreeningRepository } from '../../../../Infrastructure/Repository/screening.repository';
 import { HallRepository } from 'src/Infrastructure/Repository/hall.repository';
 import { MovieRepository } from 'src/Infrastructure/Repository/movie.repository';
+import { Screening } from 'src/Domain/Entities/Screening';
 
 @CommandHandler(CreateScreeningCommand)
 export class CreateScreeningHandler
@@ -31,10 +32,20 @@ export class CreateScreeningHandler
       //   throw new Error('Hall not created');
       // }
 
-      // Create the screening entity
-      const createdScreening = await this.screeningRepository.createScreening(
-        command.screening,
+      const hall = await this.hallRepository.getHall(command.screening.hallId);
+      const movie = await this.movieRepository.getMovie(
+        command.screening.movieId,
       );
+
+      const screening = new Screening();
+      screening.hall = hall;
+      screening.movie = movie;
+      screening.startTime = command.screening.startTime;
+      screening.endTime = command.screening.endTime;
+
+      // Create the screening entity
+      const createdScreening =
+        await this.screeningRepository.createScreening(screening);
       if (!createdScreening) {
         throw new Error('Screening not created');
       }
